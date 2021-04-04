@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/handsontable@8.3.2/dist/handsontable.full.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/handsontable@8.3.2/dist/handsontable.full.min.css" rel="stylesheet"
+    media="screen">
+</head>
+
+<body>
+  <h1>Hands on table ecks dee!</h1>
+  <div id="example">
+    <button id="save">Save</button>
+    <button id="add-row">Add row</button>
+  </div>
+  <script>
+    const data = [
+      { id: 1, name: 'Ted Right', address: '' },
+      { id: 2, name: 'Frank Honest', address: '' },
+      { id: 3, name: 'Joan Well', address: '' },
+      { id: 4, name: 'Gail Polite', address: '' },
+      { id: 5, name: 'Michael Fair', address: '' },
+    ]
+    const container = document.getElementById('example');
+    const hot = new Handsontable(container, {
+      data: data,
+      rowHeaders: true,
+      colHeaders: [`id`, `name`, `address`],
+      filters: true,
+      dropdownMenu: true,
+      afterChange: (changes) => {
+        console.log(changes)
+        changes && changes.forEach(([row, prop, prevVal, newVal]) => {
+          // do stuff
+        })
+      }
+    })
+
+    const button = document.getElementById('save')
+    const addRow = document.getElementById('add-row')
+    const addCol = document.getElementById('add-col')
+
+    button.addEventListener(`click`, () => {
+      console.log(data)
+    })
+
+    // { id: 1, name: 'Ted Right', address: '' },
+
+    addRow.addEventListener(`click`, () => {
+      hot.alter(`insert_row`, 0)
+    })
+
+  </script>
+
+</body>
+
+</html>
